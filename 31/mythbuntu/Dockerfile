@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 
 # Set correct environment variables
 ENV HOME="/root"
@@ -27,8 +27,8 @@ RUN apt-get update -qq && \
 # set the locale
 	locale-gen en_US.UTF-8 && \
 # prepare apt 
-	apt-get install -y gnupg software-properties-common --no-install-recommends && \
-	apt-add-repository ppa:mythbuntu/32 -y && \
+	apt-get install -y software-properties-common --no-install-recommends && \
+	apt-add-repository ppa:mythbuntu/31 -y && \
 	apt-get update -qq && \
 	apt-get install -y --no-install-recommends mythtv-common mysql-client  && \
 # clean up
