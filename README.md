@@ -6,7 +6,7 @@ Docker image to run a MythTV backend. It also includes MythWeb, database backups
 * The mythdatabase branch/tag should be run side-by-side with master/latest branch/tag. It will run the cron job to check and backup your MythTV database. 
 * The mythweb branch/tag starts an Apache service, to host MythWeb, on port 80.
 * The setup branch/tag is intended to run mythtv-setup over VNC. This should be run instead of the master/latest branch/tag, during setup only.
-* The current version is 31, however version 30 is still available, using the 30 tags
+* The current version is 32, however version 31 abd 30 is still available, using the 30 and 31 tags
 * Linked Github code contains example docker-compose.yml for mythbackend and mythsetup
 
 
