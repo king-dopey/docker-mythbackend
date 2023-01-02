@@ -1,4 +1,4 @@
-FROM dheaps/mythbackend:mythbuntu
+FROM dheaps/mythbackend:31-mythbuntu
 
 # Expose ports
 EXPOSE 5000 6543 6544

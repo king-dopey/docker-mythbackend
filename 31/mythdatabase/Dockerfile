@@ -1,4 +1,4 @@
-FROM dheaps/mythbackend:mythbuntu
+FROM dheaps/mythbackend:31-mythbuntu
 
 # Add files
 COPY files /root/
