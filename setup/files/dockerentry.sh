@@ -64,7 +64,7 @@ cp /root/config.xml /etc/mythtv/config.xml
 cp /root/config.xml /home/mythtv/.mythtv/config.xml
 
 for f in /var/lib/mythtv/.mythtv/*.xmltv; do
-    [ -e "$f" ] && echo "Copying XMLTV config file that was set in home" && 
+    [ -e "$f" ] && echo "Copying XMLTV config file that was set in home" &&
     cp /var/lib/mythtv/.mythtv/*.xmltv /home/mythtv/.mythtv/ &&
     cp /home/mythtv/.mythtv/*.xmltv /root/.mythtv/
     break
@@ -109,8 +109,8 @@ if [ "xpwd" != "x$DATABASE_ROOT_PWD" ]; then
 	  echo "Creating database(s)."
 	  mysql -h ${DATABASE_HOST} -P ${DATABASE_PORT} -u ${DATABASE_ROOT} -p${DATABASE_ROOT_PWD} -e "CREATE DATABASE IF NOT EXISTS ${DATABASE_NAME}"
 	  mysql -h ${DATABASE_HOST} -P ${DATABASE_PORT} -u ${DATABASE_ROOT} -p${DATABASE_ROOT_PWD} -e "CREATE USER '${DATABASE_USER}' IDENTIFIED BY '${DATABASE_PASS}'"
-	  mysql -h ${DATABASE_HOST} -P ${DATABASE_PORT} -u ${DATABASE_ROOT} -p${DATABASE_ROOT_PWD} -e "GRANT ALL ON ${DATABASE_NAME}.* TO '${DATABASE_USER}' IDENTIFIED BY '${DATABASE_PASS}'"
-	  mysql -h ${DATABASE_HOST} -P ${DATABASE_PORT} -u ${DATABASE_ROOT} -p${DATABASE_ROOT_PWD} -e "GRANT CREATE TEMPORARY TABLES ON ${DATABASE_NAME}.* TO '${DATABASE_USER}' IDENTIFIED BY '${DATABASE_PASS}'"
+	  mysql -h ${DATABASE_HOST} -P ${DATABASE_PORT} -u ${DATABASE_ROOT} -p${DATABASE_ROOT_PWD} -e "GRANT ALL ON ${DATABASE_NAME}.* TO '${DATABASE_USER}'"
+	  mysql -h ${DATABASE_HOST} -P ${DATABASE_PORT} -u ${DATABASE_ROOT} -p${DATABASE_ROOT_PWD} -e "GRANT CREATE TEMPORARY TABLES ON ${DATABASE_NAME}.* TO '${DATABASE_USER}'"
 	  mysql -h ${DATABASE_HOST} -P ${DATABASE_PORT} -u ${DATABASE_ROOT} -p${DATABASE_ROOT_PWD} -e "ALTER DATABASE ${DATABASE_NAME} DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci"
 	else
 	  echo "Database already exists"
