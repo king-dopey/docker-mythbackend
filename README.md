@@ -3,7 +3,7 @@ MythTV backend
 
 Docker image to run a MythTV backend. It also includes MythWeb, database backups, and HDHomeRun utilities.
 
-* The mythdatabase branch/tag should be run side-by-side with master/latest branch/tag. It will run the cron job to check and backup your MythTV database. 
+* The mythdatabase branch/tag should be run side-by-side with master/latest branch/tag. It will run the cron job to check and backup your MythTV database.
 * The mythweb branch/tag starts an Apache service, to host MythWeb, on port 80.
 * The setup branch/tag is intended to run mythtv-setup over VNC. This should be run instead of the master/latest branch/tag, during setup only.
 * The current version is 32, however version 31 abd 30 is still available, using the 30 and 31 tags
@@ -14,7 +14,8 @@ Docker image to run a MythTV backend. It also includes MythWeb, database backups
 * Note2: All special MythTV folders (as setup in mythtv-setup) should be added to the /var/lib/mythtv volume. If .mythtv/config.xml and/or .mythtv/*.xmltv is found in this volume, that config is used.
 * Note3: The mythbackend service checks and waits for the mysql database, using the environment variables to configure.
 * Note4: Setup VNC creates a terminal and launches mythtv-setup. If mythtv-setup is closed, the terminal remains, so you can do additional setup (such as with XMLTV)
-* Note5: Keep in mind that docker allows ports to be published to specific IPs, however, this does not work in host mode. Because of this, mythweb, mythdatabase and the mysql instances can have seprate IP addresses, but mythbackend must share the IP of the host.
+* Note5: Setup runs as root. On first run you will be asked whether you wish to be added to the "mythtv" group. Choose No, and then choose Yes to disable the warning in future.
+* Note6: Keep in mind that docker allows ports to be published to specific IPs, however, this does not work in host mode. Because of this, mythweb, mythdatabase and the mysql instances can have seprate IP addresses, but mythbackend must share the IP of the host.
 
 ## Usage
 
@@ -53,7 +54,7 @@ sudo docker run -d --name mythweb \
         -e "DATABASE_PWD=mythtv" \
         -e "TZ=Europe/Paris" \
 		 dheaps/mythbackend:mythweb
-		 
+
 or
 
 sudo docker run -d --name mythbackend \
@@ -96,7 +97,7 @@ Below are some remarks about the parameters.
 * USER_ID and GROUP_ID : used to match IDs defined on the Docker host so that UNIX rights are correct when accessing the volumes
 * DATABASE_HOST and DATABASE_PORT : the host (and port) where the mythconverg database is. If the database exists it is untouched, if not it is created
 * DATABASE_ROOT and DATABASE_ROOT_PWD : credentials used to create the database if needed
-* DATABASE_USER and DATABASE_PWD : credentials used check if mysql is up and wait otherwise; and to create config as necessary 
+* DATABASE_USER and DATABASE_PWD : credentials used check if mysql is up and wait otherwise; and to create config as necessary
 * TZ : to set the correct timezone
 
 ## Network parameters
