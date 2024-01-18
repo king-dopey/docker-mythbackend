@@ -13,11 +13,15 @@ COPY files /root/
 RUN apt-get install -y --no-install-recommends mythtv-backend mythtv-transcode-utils mythtv-status iputils-ping unzip xmltv hdhomerun-config && \
 # install mythnuv2mkv
 	apt-get install -y perl mplayer mencoder wget imagemagick \
-	libmp3lame0 x264 faac faad mkvtoolnix vorbis-tools gpac && \
+	libmp3lame0 x264 faac faad mkvtoolnix vorbis-tools \
+	build-essential pkg-config g++ git cmake yasm zlib1g-dev && \
+	git clone https://github.com/gpac/gpac.git && \
+	cd gpac && ./configure && make && make install && cd .. && rm -rf gpac && \
 	mv /root/mythnuv2mkv.sh /usr/bin/ && \
 	chmod +x /usr/bin/mythnuv2mkv.sh && \
 # clean up
-	apt-get clean && \
+	apt-get purge -y build-essential pkg-config g++ git cmake yasm && \
+	apt-get clean && apt-get autoremove -y && \
 	rm -rf /tmp/* /var/tmp/* \
 	/usr/share/man /usr/share/groff /usr/share/info \
 	/usr/share/lintian /usr/share/linda /var/cache/man && \
