@@ -1,0 +1,30 @@
+version: '2'
+services:
+    mythsetup:
+        container_name: mythsetup
+        hostname: mythtv
+        network_mode: host
+        ports:
+            - '5000:5000'
+            - '6543:6543'
+            - '6544:6544'
+            - '5900:5900'
+        depends_on:
+            - mythsql
+        volumes:
+            - '/docker-volume/mythtv:/var/lib/mythtv'
+        environment:
+            - USER_ID=113
+            - GROUP_ID=1000
+            - DATABASE_PWD=MakeUpAP@ss
+            - TZ=America/Los_Angeles
+        image: 'dheaps/mythbackend:setup'
+    mythsql:
+        container_name: mythsql
+        hostname: mythsql
+        ports:
+            - '192.168.1.123:3306:3306'
+        volumes:
+            - '/docker-volume/mythsql:/var/lib/mysql'
+        restart: unless-stopped
+        image: mysql:5

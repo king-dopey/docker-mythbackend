@@ -1,0 +1,54 @@
+version: '2'
+services:
+    mythbackend:
+        container_name: mythbackend
+        hostname: mythtv
+        network_mode: host
+        volumes:
+            - '/docker-volume/mythtv:/var/lib/mythtv'
+        environment:
+            - USER_ID=113
+            - GROUP_ID=1000
+            - DATABASE_PWD=MakeUpAP@ss
+            - TZ=America/Los_Angeles
+        restart: unless-stopped
+        image: 'dheaps/mythbackend:latest'
+    mythweb:
+        container_name: mythweb
+        hostname: mythweb.yourlocaldomain.net
+        links:
+            - mythsql
+            - mythbackend
+        ports:
+            - '192.168.1.123:80:80'
+        volumes:
+            - '/docker-volume/mythtv:/var/lib/mythtv'
+        environment:
+            - DATABASE_HOST=mythsql
+            - TZ=America/Los_Angeles
+            - DATABASE_PWD=MakeUpAP@ss
+        restart: unless-stopped
+        image: 'dheaps/mythbackend:mythweb'
+    mythdatabase:
+        container_name: mythdatabase
+        hostname: mythdatabase
+        links:
+            - mythsql
+        volumes:
+            - '/docker-volume/mythtv:/var/lib/mythtv'
+        environment:
+            - USER_ID=113
+            - GROUP_ID=1000
+            - DATABASE_PWD=MakeUpAP@ss
+            - TZ=America/Los_Angeles
+        restart: unless-stopped
+        image: 'dheaps/mythbackend:mythdatabase'
+    mythsql:
+        container_name: mythsql
+        hostname: mythsql
+        ports:
+            - '192.168.1.123:3306:3306'
+        volumes:
+            - '/docker-volume/mythsql:/var/lib/mysql'
+        restart: unless-stopped
+        image: mysql:5
