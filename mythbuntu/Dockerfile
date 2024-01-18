@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:23.10
 
 # Set correct environment variables
 ENV HOME="/root"
