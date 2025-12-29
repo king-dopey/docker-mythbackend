@@ -6,7 +6,8 @@ Docker image to run a MythTV backend. It also includes MythWeb, database backups
 * The mythdatabase branch/tag should be run side-by-side with master/latest branch/tag. It will run the cron job to check and backup your MythTV database.
 * The mythweb branch/tag starts an Apache service, to host MythWeb, on port 80.
 * The setup branch/tag is intended to run mythtv-setup over VNC. This should be run instead of the master/latest branch/tag, during setup only.
-* The current version is 32, however version 31 abd 30 is still available, using the 30 and 31 tags
+* The current version is 35, running on Ubuntu 24.04
+* Older MythTV versions are available, running older versions of Ubuntu. Each older version is tagged as it's version number.
 * Linked Github code contains example docker-compose.yml for mythbackend and mythsetup
 
 
@@ -18,6 +19,8 @@ Docker image to run a MythTV backend. It also includes MythWeb, database backups
 * Note6: Keep in mind that docker allows ports to be published to specific IPs, however, this does not work in host mode. Because of this, mythweb, mythdatabase and the mysql instances can have seprate IP addresses, but mythbackend must share the IP of the host.
 
 ## Usage
+
+The [Examples](https://github.com/king-dopey/docker-mythbackend/tree/master/Examples) folder contains sample docker-compose files. You can also run the commands directly, as follows.
 
 Launch the container via docker:
 ```
@@ -108,4 +111,8 @@ Below are some remarks about the parameters.
 ## XMLTV
 * As of version 31 XMLTV must be used, which is no where near as friendly as its predecessor, yet more featureful
 * Be sure to select the new XMLTV Video Source in mythtv-setup, over VNC
-* Once video source is seleted the XMLTV config file must be created by invoking a command such as ${XML_TV_COMMAND} --configure --config-file ~mythtv/.mythtv/${FILENAME}.xmltv, replacing ${XML_TV_COMMAND} with the correct result from tv_find_grabbers and ${FILENAME} is the name of the video source created in mythtv-setup
+* Once video source is seleted the XMLTV config file must be created by invoking a command such as below, replacing \${XML_TV_COMMAND} with the correct result from tv_find_grabbers and \${FILENAME} is the name of the video source created in mythtv-setup
+``` 
+${XML_TV_COMMAND} --configure --config-file ~mythtv/.mythtv/${FILENAME}.xmltv
+```
+
