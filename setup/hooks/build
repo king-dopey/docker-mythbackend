@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker buildx create --name container --driver docker-container --use
+docker buildx build --sbom=generator=docker/scout-sbom-indexer:latest --provenance=mode=max -t $IMAGE_NAME --output=type=registry .

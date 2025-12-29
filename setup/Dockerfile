@@ -1,4 +1,4 @@
-FROM dheaps/mythbackend:latest
+FROM dheaps/mythbackend:backend-24.04-35
 
 # Add files
 COPY files /root/

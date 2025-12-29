@@ -8,6 +8,8 @@ Docker image to run a MythTV backend. It also includes MythWeb, database backups
 * The setup branch/tag is intended to run mythtv-setup over VNC. This should be run instead of the master/latest branch/tag, during setup only.
 * The current version is 35, running on Ubuntu 25.10
 * Older MythTV versions are available, running older versions of Ubuntu. Each older version is tagged as it's version number.
+* MythWeb and MythTV-Setup are depricated and replaced with the new web application
+* The mythbuntu team kept these older packages for Ubuntu 24.10, you can use them if running the backend-24.04-35 tag
 * Linked Github code contains example docker-compose.yml for mythbackend and mythsetup
 
 

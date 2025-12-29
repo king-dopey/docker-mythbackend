@@ -1,4 +1,5 @@
-FROM dheaps/mythbackend:mythbuntu
+ARG MYTHBUNTU_VERSION=mythbuntu-25.10-35
+FROM dheaps/mythbackend:${MYTHBUNTU_VERSION}
 
 # Expose ports
 EXPOSE 5000 6543 6544

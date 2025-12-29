@@ -1,0 +1,6 @@
+#!/bin/bash
+
+docker buildx create --name container --driver docker-container --use
+
+docker buildx build --sbom=generator=docker/scout-sbom-indexer:latest --provenance=mode=max --build-arg MYTHBUNTU_VERSION=mythbuntu-24.04-35 -t dheaps/mythbackend:backend-24.04-35 --output=type=registry .
+docker buildx build --sbom=generator=docker/scout-sbom-indexer:latest --provenance=mode=max --build-arg MYTHBUNTU_VERSION=mythbuntu-25.10-35 -t dheaps/mythbackend:backend-25.10-35 -t dheaps/mythbackend:latest --output=type=registry .
