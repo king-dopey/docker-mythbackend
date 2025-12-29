@@ -1,5 +1,5 @@
 # Build arguments with defaults matching the current (newer) version
-ARG UBUNTU_VERSION=24.04
+ARG UBUNTU_VERSION=25.10
 ARG MYTHBUNTU_VERSION=35
 
 FROM ubuntu:${UBUNTU_VERSION}
@@ -24,6 +24,7 @@ ENV DATABASE_USER=mythtv
 ENV DATABASE_PWD=mythtv
 
 # add repositories
+ARG MYTHBUNTU_VERSION
 RUN apt-get update -qq && \
     apt-get install -y locales tzdata && \
 # chfn workaround - Known issue within Dockers
