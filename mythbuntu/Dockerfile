@@ -1,4 +1,8 @@
-FROM ubuntu:24.04
+# Build arguments with defaults matching the current (newer) version
+ARG UBUNTU_VERSION=24.04
+ARG MYTHBUNTU_VERSION=35
+
+FROM ubuntu:${UBUNTU_VERSION}
 
 # Set correct environment variables
 ENV HOME="/root"
@@ -21,20 +25,20 @@ ENV DATABASE_PWD=mythtv
 
 # add repositories
 RUN apt-get update -qq && \
-	apt-get install -y locales tzdata && \
+    apt-get install -y locales tzdata && \
 # chfn workaround - Known issue within Dockers
-	ln -s -f /bin/true /usr/bin/chfn && \
+    ln -s -f /bin/true /usr/bin/chfn && \
 # set the locale
-	locale-gen en_US.UTF-8 && \
+    locale-gen en_US.UTF-8 && \
 # prepare apt 
-	apt-get install -y gnupg software-properties-common --no-install-recommends && \
-	apt-add-repository ppa:mythbuntu/35 -y && \
-	apt-get update -qq && \
-	apt-get install -y --no-install-recommends mythtv-common mysql-client  && \
+    apt-get install -y gnupg software-properties-common --no-install-recommends && \
+    apt-add-repository ppa:mythbuntu/${MYTHBUNTU_VERSION} -y && \
+    apt-get update -qq && \
+    apt-get install -y --no-install-recommends mythtv-common mysql-client  && \
 # clean up
-	apt-get clean && \
-	rm -rf /tmp/* /var/tmp/* \
-	/usr/share/man /usr/share/groff /usr/share/info \
-	/usr/share/lintian /usr/share/linda /var/cache/man && \
-	(( find /usr/share/doc -depth -type f ! -name copyright|xargs rm || true )) && \
-	(( find /usr/share/doc -empty|xargs rmdir || true ))
+    apt-get clean && \
+    rm -rf /tmp/* /var/tmp/* \
+    /usr/share/man /usr/share/groff /usr/share/info \
+    /usr/share/lintian /usr/share/linda /var/cache/man && \
+    (( find /usr/share/doc -depth -type f ! -name copyright|xargs rm || true )) && \
+    (( find /usr/share/doc -empty|xargs rmdir || true ))
